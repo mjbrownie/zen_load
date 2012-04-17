@@ -2,7 +2,15 @@ Zen_load - a Very simple load monitor to use with dzen
 
 will display load/memory/disk and be a clickable shortcut to remote servers.
 
+Also it has pretty color coding for any numbers you need to worry about.
+
 I'm using in an xmonad setup to monitor about 5 servers.
+
+It looks like this
+
+https://github.com/mjbrownie/zen_load/raw/master/zen_load.png
+
+Clicking on the numbers will open a shell
 
 prerequisites:
     dzen2: (The very latest to support the ^co command tag).
