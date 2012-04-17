@@ -1,0 +1,32 @@
+Zen_load - a Very simple load monitor to use with dzen
+
+will display load/memory/disk and be a clickable shortcut to remote servers.
+
+I'm using in an xmonad setup to monitor about 5 servers.
+
+prerequisites:
+    dzen2: (The very latest to support the ^co command tag).
+    you may need to compile from source.
+
+    urxvt: hardcoded ... sorry lazy for now...fork :)
+
+    Server logins must already be authenticated by an ssh-agent
+
+
+It will periodically check loads on your servers and 
+
+1. clone and make a fifo
+
+    eg. mkfifo ~/.zen_load/fifo
+
+2. Create a ~/.zen_load/servers.txt file looks like this
+
+www:username@webserver.com
+mail:username@mailserver.com
+dns:username@dnsserver.com
+
+2. in your crontab 
+    * * * * * ~/.zen_load/monitor.py > ~/.zen_load/fifo
+
+3. Load somewhere in the background. (Eg. check out my dotfiles xmonad.hs)
+    "tail -f ~/.zen_load/fifo | dzen2 -ta r "
