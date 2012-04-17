@@ -2,6 +2,7 @@
 
 import subprocess
 import datetime
+import sys
 
 #TODO add an override option
 #NOTE Please check this command thoroughly to ensure you are comfortable with it
@@ -18,8 +19,12 @@ DEFAULT_PARSE = ""
 DISABLE_THROWS = False
 
 def main():
-    with open('~/.zen_load/servers.txt') as fp:
-        servers = [s.rstrip().split(':') for s in fp.readlines()]
+    try:
+        with open('.zen_load/servers.txt' ,'r') as fp:
+            servers = [s.rstrip().split(':') for s in fp.readlines()]
+    except:
+        print "No servers defined: " + datetime.datetime.now().strftime('%d/%m %H:%M')
+        sys.exit()
 
     buttons = []
 

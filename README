@@ -34,7 +34,7 @@ mail:username@mailserver.com
 dns:username@dnsserver.com
 
 2. in your crontab 
-    * * * * * ~/.zen_load/monitor.py | ~/.zen_load/fifo
+    * * * * * cd ~/ && ~/.zen_load/monitor.py > ~/.zen_load/fifo
 
 3. Load somewhere in the background. (Eg. check out my dotfiles xmonad.hs)
     "tail -f ~/.zen_load/fifo | dzen2 -ta r "
