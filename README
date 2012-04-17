@@ -21,7 +21,7 @@ prerequisites:
     Server logins must already be authenticated by an ssh-agent
 
 
-It will periodically check loads on your servers and 
+It will periodically check load/mem/disk via a cron script
 
 1. clone and make a fifo
 
