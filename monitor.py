@@ -18,7 +18,7 @@ DEFAULT_PARSE = ""
 DISABLE_THROWS = False
 
 def main():
-    with open('servers.txt') as fp:
+    with open('~/.zen_load/servers.txt') as fp:
         servers = [s.rstrip().split(':') for s in fp.readlines()]
 
     buttons = []
