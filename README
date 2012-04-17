@@ -38,3 +38,7 @@ dns:username@dnsserver.com
 
 3. Load somewhere in the background. (Eg. check out my dotfiles xmonad.hs)
     "tail -f ~/.zen_load/fifo | dzen2 -ta r "
+
+    An example xmonad.hs using can be found here
+
+    https://github.com/mjbrownie/dotfiles/blob/master/_xmonad/xmonad.hs#L78
