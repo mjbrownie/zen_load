@@ -17,6 +17,8 @@ DEFAULT_COMAND = r"echo \`cut -d' ' -f1-3 /proc/loadavg\` \`grep MemFree /proc/m
 DEFAULT_PARSE = ""
 
 DISABLE_THROWS = False
+EXTRA_ZEN = True
+EXTRA_EXTRA_ZEN = True
 
 def main():
     try:
@@ -51,6 +53,13 @@ def main():
 
             display = "%(name)s: %(l1)s %(l2)s %(l3)s %(mem)s %(disk)s" % colors
             #TODO allow for more shells
+            if EXTRA_ZEN:
+                if not 'green' in display and not 'red' in display:
+                    display = "%(name)s :-) " % colors
+                elif EXTRA_EXTRA_ZEN:
+                    c = 'red' in display and 'red' or 'green'
+                    display = "%s ^fg(%s):-(^fg() " % (s[0],c)
+
             shell = 'urxvt -title "%(name)s" -e ssh %(login)s' % colors
 
             button = "^ca(1,%s) %s ^ca()" % (shell,display)
@@ -59,14 +68,12 @@ def main():
                     button
                     )
 
-        except Exception as e:
-            if DISABLE_THROWS:
-                raise e
-
-            buttons.append("%s down!" % s[0])
+        except Exception:
+            shell = 'urxvt -title "%s" -e ssh %s' % tuple(s)
+            buttons.append("^ca(1,%s) no %s! ^ca()" % (shell, s[0]))
 
 
-        print " | ".join(buttons)+ " | " + datetime.datetime.now().strftime('%d/%m %H:%M')
+    print " | ".join(buttons)+ " | " + datetime.datetime.now().strftime('%d/%m %H:%M')
 
 
 def load_check(i):
