@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 import subprocess
 import datetime
 import sys
@@ -54,11 +53,15 @@ def main():
             display = "%(name)s: %(l1)s %(l2)s %(l3)s %(mem)s %(disk)s" % colors
             #TODO allow for more shells
             if EXTRA_ZEN:
-                if not 'green' in display and not 'red' in display:
-                    display = "%(name)s :-) " % colors
-                elif EXTRA_EXTRA_ZEN:
-                    c = 'red' in display and 'red' or 'green'
-                    display = "%s ^fg(%s):-(^fg() " % (s[0],c)
+                if not 'green' in display and not 'red' in display \
+                        and not 'yellow' in display:
+                    #display = "%(name)s :-) " % colors
+                    display = "%(name)s" % colors
+                elif EXTRA_EXTRA_ZEN and 'green' in display \
+                        and not 'red' in display:
+                    c = 'yellow' in display and 'yellow' or 'green'
+                    #display = "%s ^fg(%s):-(^fg() " % (s[0],c)
+                    display = "%s ^fg(%s):|^fg() " % (s[0],c)
 
             shell = 'urxvt -title "%(name)s" -e ssh %(login)s' % colors
 
@@ -80,15 +83,17 @@ def load_check(i):
     i = float(i)
     if i < 1:
         return i
-    if i >= 1 and i < 2:
+    if i < 2:
         return "^fg(green)%s^fg()" % i
+    if i < 6:
+        return "^fg(orange)%s^fg()" % i
     return "^fg(red)%s^fg()" % i
 
 def mem_check(i):
     i = int(i)
-    if i < 150000:
+    if i < 80000:
         return "^fg(red)%s^fg()" % i
-    if i < 400000:
+    if i < 130000:
         return "^fg(green)%s^fg()" % i
     return i
 
